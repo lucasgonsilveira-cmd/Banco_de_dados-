@@ -1,3 +1,8 @@
+//Trabalho 1 Banco de dados GTI Fatec Jahu
+//Aluno: Lucas Gonçalves Silveira
+
+
+//Primeiro analizamos o texto proposto e criamos as tabelas e suas subtabelas
 Table usuarios{
   id_usuario int [pk] 
   email_usuario varchar [unique]
@@ -11,7 +16,7 @@ Table enderecos{
   endereco_usuario varchar 
   usuario_id int 
 }
-
+//Aqui fazemos a referencia de 1 usuario pode possuir varios end
 Ref {usuarios.id_usuario < enderecos.usuario_id}
 
 Table planos{
@@ -31,6 +36,7 @@ Table plano_usuarios{
   status varchar
 }
 
+//Referencias das tabelas de planos e usuarios
 Ref {plano_usuarios.usuario_id > usuarios.id_usuario}
 Ref {planos.planos_usuarios_id > plano_usuarios.id_plano_usuario}
 
@@ -42,7 +48,9 @@ Table idiomas {
 }
 
 Ref {idiomas.usuario_id > usuarios.id_usuario}
+//Referencia da config de idiomas dos usuarios
 
+//Tabela conteudos possui referencias com diversas tabelas do DB
 Table conteudos{
   id_conteudo int [pk]
   tipo_conteudo varchar
@@ -90,6 +98,7 @@ Table nome_artistas{
   artista_id int
 }
 
+//Referencias das musicas e artistas
 Ref {musicas.id_musica - albuns.musica_id}
 Ref {artistas.id_artista - albuns.artista_id}
 Ref {artistas.id_artista < nome_artistas.artista_id}
@@ -121,6 +130,7 @@ Table atores{
   filme_id int
 }
 
+//Referencias dos diretores e atores com os filmes
 Ref {filmes.diretor_id > diretores.id_diretor}
 Ref {filmes.id_filme > atores.filme_id}
 
@@ -165,5 +175,6 @@ Table playlists{
   conteudo_id int
 }
 
+//Referencia dos usuarios e conteudos com a playlist
 Ref{usuarios.id_usuario < playlists.usuario_id}
 Ref{conteudos.id_conteudo < playlists.conteudo_id}
